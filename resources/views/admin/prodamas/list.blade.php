@@ -3,7 +3,7 @@
 @section('prodamas', 'active')
 
 @section('title')
-Prodamas Submission
+Visi Misi & Dokumen Submission
 @endsection
 
 @section('content')
@@ -35,7 +35,8 @@ Prodamas Submission
                     <a href="/admin/prodamas/{{$prodamas->id}}" class="btn btn-info">Edit</a>
                     @csrf
                     @method('DELETE')
-                    <input type="submit" class="btn btn-danger my-1" onclick="return confirm('Yakin Ingin Menghapus Foto?')" value="Delete">
+                    <input type="submit" class="btn btn-danger my-1"
+                        onclick="return confirm('Yakin Ingin Menghapus Foto?')" value="Delete">
                 </form>
             </td>
         </tr>
@@ -57,17 +58,15 @@ Prodamas Submission
         </tr>
     </thead>
     <tbody>
-        @foreach ($transforms as $transform)
         <tr>
-            <td>{{$transform->judul}}</td>
-            <td>{{$transform->foto}}</td>
+            <td>{{$transforms->judul}}</td>
+            <td>{{$transforms->caption}}</td>
             <td align="right">
                 <form action="/admin/prodamas/" method="POST">
                     <a href="/admin/prodamas/" class="btn btn-info">Edit</a>
                 </form>
             </td>
         </tr>
-        @endforeach
     </tbody>
 </table>
 
@@ -93,7 +92,8 @@ Prodamas Submission
                     <a href="/admin/prodamass/{{$regulasi->id}}" class="btn btn-info">Edit</a>
                     @csrf
                     @method('DELETE')
-                    <input type="submit" class="btn btn-danger my-1" onclick="return confirm('Yakin Ingin Menghapus Foto?')" value="Delete">
+                    <input type="submit" class="btn btn-danger my-1"
+                        onclick="return confirm('Yakin Ingin Menghapus Foto?')" value="Delete">
                 </form>
             </td>
         </tr>
@@ -108,8 +108,8 @@ Prodamas Submission
 
 @section('table')
 <script>
-    $(document).ready(function() {
-        $('#tableFoto').DataTable(); //sesuikan id tabel yg dibat
-    });
+$(document).ready(function() {
+    $('#tableFoto').DataTable(); //sesuikan id tabel yg dibat
+});
 </script>
 @endsection

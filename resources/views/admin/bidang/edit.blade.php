@@ -8,12 +8,13 @@ Edit Bidang
 
 @section('content')
 
-<form action="/admin/bidang/{{$bidang->id}}" method="POST" enctype="application/x-www-form-urlencoded">
+<form action="/admin/bidang/{{$bidang->id}}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('put')
     <div class="form-group">
         <label for="judul">Judul</label>
-        <input type="text" class="form-control" name="judul" id="judul" placeholder="judul of foto" value="{{$bidang->judul}}">
+        <input type="text" class="form-control" name="judul" id="judul" placeholder="judul of foto"
+            value="{{$bidang->judul}}">
         @error('judul')
         <div class="alert alert-danger">
             {{ $message }}
@@ -25,7 +26,7 @@ Edit Bidang
         @if ($bidang->foto)
         <p>{{$bidang->foto}}</p>
         @endif
-        <input type="file" class="form-control" name="foto[]" id="foto[]" value="{{$bidang->foto}}">
+        <input type="file" class="form-control" name="foto" id="foto" value="{{$bidang->foto}}">
         @error('foto')
         <div class="alert alert-danger">
             {{ $message }}
@@ -34,7 +35,8 @@ Edit Bidang
     </div>
     <div class="form-group">
         <label for="caption">Caption</label>
-        <textarea name="caption" id="description" class="form-control" cols="30" rows="3">{{$bidang->caption}}</textarea>
+        <textarea name="caption" id="description" class="form-control" cols="30"
+            rows="3">{{$bidang->caption}}</textarea>
         @error('caption')
         <div class="alert alert-danger">
             {{ $message }}

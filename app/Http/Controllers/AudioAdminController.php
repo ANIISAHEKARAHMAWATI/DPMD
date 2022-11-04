@@ -24,25 +24,25 @@ class AudioAdminController extends Controller
             'konten' => 'required',
         ]);
         // dump($request);
-        // sampul
-        $extThumb = $request->gambar_sampul->getClientOriginalExtension();
-        $pathThumb = "sampul-".time().".".$extThumb;
-        $pathStore = $request->gambar_sampul->move(public_path('../audioProd/thumb'), $pathThumb);
+        // // sampul
+        // $extThumb = $request->gambar_sampul->getClientOriginalExtension();
+        // $pathThumb = "sampul-".time().".".$extThumb;
+        // $pathStore = $request->gambar_sampul->move(public_path('../audioProd/thumb'), $pathThumb);
 
         // // konten audio
-        // $konten = $request->file('konten');
-        // $audioname = $konten->getClientOriginalName();
-        // $audiopath = $konten->storeAs('konten', $audioname);
+        $konten = $request->file('konten');
+        $audioname = $konten->getClientOriginalName();
+        $audiopath = $konten->storeAs('konten', $audioname);
         // $pathStore = $request->konten->move(public_path('../audioProd/fileaudio'), $audiopath);
-/*
+
         $audio_sampul = $request->audio_sampul;
         $new_audio_sampul = time() . ' - ' . $audio_sampul->getClientOriginalName();
 
         $konten = $request->konten;
         $new_konten = time() . ' - ' . $konten->getClientOriginalName();
-*/
+
         AudioAdmin::create([
-            "gambar_sampul" => $pathThumb,
+            "gambar_sampul" => $audiopath,
             "judul" => $request["judul"],
             "konten" => $request["konten"],
             "caption" => $request["caption"],

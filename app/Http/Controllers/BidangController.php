@@ -12,7 +12,11 @@ class BidangController extends Controller
     public function index()
     {
         $bidangs = Bidang::orderBy('id')->get();
-        $descriptions = DescriptionAdmin::first()->get();
+        if(DescriptionAdmin::first()){
+            $descriptions = DescriptionAdmin::first()->get();
+        }else{
+            $descriptions = [];
+        }
         return view('tentang.bidang', compact('bidangs', 'descriptions'));
     }
 }

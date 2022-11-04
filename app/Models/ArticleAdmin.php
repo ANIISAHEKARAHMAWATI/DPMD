@@ -11,7 +11,7 @@ class ArticleAdmin extends Model
     use HasFactory;
     protected $table = "articles";
 
-    protected $fillable = ["status","gambar_sampul","text_sampul","judul","slug","article","picture"];
+    protected $fillable = ["status","gambar_sampul","text_sampul","judul","slug","article"];
 
     public function getCreatedAtAttribute() {
         return Carbon::parse($this->attributes['created_at'])

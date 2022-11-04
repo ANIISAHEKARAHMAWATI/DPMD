@@ -55,10 +55,11 @@
         <div class="card-right bg-light">
             <h5 class="card-header">Kunjungi Website</h5>
             <ul class="list-group list-group-flush">
-                <a class="list-group-item" href="https://www.kedirikota.go.id/">Pemerintah Kota Kediri</a>
-                <a class="list-group-item" href="https://prodamasplus.kedirikota.go.id/auth/login">Progressio</a>
-                <a class="list-group-item"
-                    href="https://survey123.arcgis.com/share/932769e15a27418aa9b448b0b1e6b6b6">Bank Sampah</a>
+                <a class="list-group-item" target="blank" href="http://www.jombangkab.go.id/">Kabupaten Jombang</a>
+                <a class="list-group-item" target="blank" href="https://sabdopalon.jombangkab.go.id/">Sabdapalon
+                    Jombang</a>
+                <a class="list-group-item" target="blank" href="https://sabdopalon.jombangkab.go.id/eebukkades/">EE
+                    Buk Kades</a>
             </ul>
         </div>
     </div>

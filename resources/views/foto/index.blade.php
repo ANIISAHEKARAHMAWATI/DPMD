@@ -40,7 +40,7 @@
         @forelse ($fotos as $foto)
         <div class=" card noBorder cardAudio mx-1" style="width: 18rem; cursor: pointer;">
             <div class="card h-100 noBorder" data-bs-toggle="modal" data-bs-target="#foto{{ $foto->id }}">
-                <img src="{{ asset('fotoProd/' . $foto->konten) }}" style="object-fit: cover;"
+                <img src="{{ asset('fotoProd/' . $foto->foto_konten) }}" style="object-fit: cover;"
                     class="card-img-top d-flex justify-content mx-auto" alt="video-prodamas">
                 <div class="card-body">
                     <h5 class="card-title">
@@ -77,15 +77,15 @@
                                                     margin: 0;
                                                     margin-top: 30px;
                                                     ">
-                                <img class="max-width: 500px" src="{{ asset('fotoProd/' . $foto->konten) }}" width="520"
-                                    height="340" controls>
+                                <img class="max-width: 500px" src="{{ asset('fotoProd/' . $foto->foto_konten) }}"
+                                    width="520" height="340" controls>
                             </div>
                             <div class="card" style="
                                                     width: 25rem;
                                                     border: none;
                                                     ">
                                 <h3>{{ $foto->judul }}</h3>
-                                <p>{{ $foto->caption }}</p>
+                                <p>{!! $foto->caption !!}</p>
                             </div>
                         </div>
                     </div>

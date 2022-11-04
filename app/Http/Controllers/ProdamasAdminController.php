@@ -29,7 +29,7 @@ class ProdamasAdminController extends Controller
         foreach ($request->file('foto') as $file) {
             if ($file->isValid()) {
                 $foto = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
-                $file->move(public_path('../prodamasProd/'), $foto);
+                $file->storeAs('prodamasProd', $foto);
                 $files[] = [
                     'judul' => $request->judul,
                     'foto' => $foto,
@@ -46,7 +46,9 @@ class ProdamasAdminController extends Controller
     {
         $prodamass = prodamas::groupBy('id')->get();
         $regulasis = regulasi::groupBy('id')->get();
-        $transforms = transform::first()->get();
+        if(transform::first())
+        $transforms = transform::first();
+        else $transforms = [];
         return view('admin.prodamas.list', compact('prodamass', 'regulasis', 'transforms'));
     }
 
@@ -70,7 +72,7 @@ class ProdamasAdminController extends Controller
         if ($foto != NULL) {
             File::delete(public_path("../prodamasProd/" . $prodamass->foto));
             $fotoPath = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $foto->getClientOriginalName());
-            $foto->move(public_path('../prodamasProd/'), $fotoPath);
+            $foto->storeAs('prodamasProd', $fotoPath);
 
             $prodamass->update([
                 'judul' => $request->judul,
@@ -111,9 +113,9 @@ class ProdamasAdminController extends Controller
 
         $foto = $request->file('foto');
         if ($foto != NULL) {
-            File::delete(public_path("../prodamasProd/" . $transforms->foto));
+            File::delete("prodamasProd/" . $transforms->foto);
             $fotoPath = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $foto->getClientOriginalName());
-            $foto->move(public_path('../prodamasProd/'), $fotoPath);
+            $foto->storeAs('prodamasProd', $fotoPath);
 
             $transforms->update([
                 'judul' => $request->judul,
@@ -147,7 +149,7 @@ class ProdamasAdminController extends Controller
         foreach ($request->file('file') as $pdf) {
             if ($pdf->isValid()) {
                 $file = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $pdf->getClientOriginalName());
-                $pdf->move(public_path('../regulasiProd/'), $file);
+                $pdf->storeAs('regulasiProd/', $file);
                 $pdfs[] = [
                     'judul' => $request->judul,
                     'file' => $file,
@@ -176,9 +178,9 @@ class ProdamasAdminController extends Controller
         $regulasis = regulasi::findorfail($id);
         $file = $request->file('file');
         if ($file != NULL) {
-            File::delete(public_path("../regulasiProd/" . $regulasis->file));
+            File::delete("regulasiProd/" . $regulasis->file);
             $filePath = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
-            $file->move(public_path('../regulasiProd/'), $filePath);
+            $file->storeAs('regulasiProd/', $filePath);
 
             $regulasis->update([
                 'judul' => $request->judul,

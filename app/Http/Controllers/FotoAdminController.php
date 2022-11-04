@@ -45,10 +45,10 @@ class FotoAdminController extends Controller
         foreach ($request->file('konten') as $file) {
             if ($file->isValid()) {
                 $konten = round(microtime(true) * 1000).'-'.str_replace(' ','-',$file->getClientOriginalName());
-                $file->move(public_path('../fotoProd/'), $konten);                    
+                $file->storeAs('fotoProd', $konten);                    
                 $files[] = [
                     'judul' => $request->judul,
-                    'konten' => $konten,
+                    'foto_konten' => $konten,
                     'caption' => $request->caption
                 ];
             }
@@ -88,16 +88,16 @@ class FotoAdminController extends Controller
             'caption' => 'required'
         ]);
 
-        $foto = FotoAdmin::findorfail($id);
+        $foto = FotoAdmin::findOrFail($id);
         $file = $request->file('konten');
         if ($file != NULL) {
-            File::delete(public_path("../fotoProd/" . $foto->konten));
+            File::delete("fotoProd/" . $foto->foto_konten);
             $filePath = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
-            $file->move(public_path('../public/fotoProd/'), $filePath);
+            $file->storeAs('fotoProd', $filePath);
 
             $foto->update([
                 'judul' => $request->judul,
-                'konten' => $filePath,
+                'foto_konten' => $filePath,
                 'caption' => $request->caption
             ]);
         } else {

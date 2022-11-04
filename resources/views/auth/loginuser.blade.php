@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Prodamas Plus</title>
+    <title>Admin DPMD Kabupaten Jombang</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 

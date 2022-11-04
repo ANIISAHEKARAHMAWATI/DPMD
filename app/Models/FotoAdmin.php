@@ -11,7 +11,7 @@ class FotoAdmin extends Model
     use HasFactory;
     protected $table = "fotos";
 
-    protected $fillable = ["judul","konten","caption"];
+    protected $fillable = ["judul","foto_konten","caption"];
 
     public function getCreatedAtAttribute() {
         return Carbon::parse($this->attributes['created_at'])

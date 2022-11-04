@@ -18,16 +18,19 @@ class VideoAdminController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'gambar_sampul' => 'required|file|image|max:2200',
+            'gambar_sampul' => 'required|image|max:2200',
             'judul' => 'required',
             'konten' => 'required',
             'caption' => 'required'
         ]);
 
         // sampul video
-        $extThumb = $request->gambar_sampul->getClientOriginalExtension();
-        $pathThumb = "sampul-".time().".".$extThumb;
-        $pathStore = $request->gambar_sampul->move(public_path('../videoProd/sampul'), $pathThumb);
+        $file = $request->file('gambar_sampul');
+        if($file->isValid()){
+            $ext = $file->extension();
+            $foto = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
+            $file->storeAs('videoProd/sampul',$foto);        
+        }
 
         // // konten video
         // $konten = $request->file('konten');
@@ -36,10 +39,11 @@ class VideoAdminController extends Controller
         // $pathStore = $request->konten->move(public_path('../videoProd/konten'), $videopath);
         
 
+        $url = explode("v=",$request['konten']);
         VideoAdmin::create([
-            "gambar_sampul" => $pathThumb,
+            "gambar_sampul" => $foto,
             "judul" => $request["judul"],
-            "konten" => $request["konten"],
+            "konten" => "https://www.youtube.com/embed/".$url[1],
             "caption" => $request["caption"],
         ]);
 
@@ -73,9 +77,9 @@ class VideoAdminController extends Controller
         $video = VideoAdmin::findorfail($id);
         $file = $request->file('gambar_sampul');
         if ($file != NULL) {
-            File::delete(public_path("../videoProd/" . $video->gambar_sampul));
+            File::delete("videoProd/" . $video->gambar_sampul);
             $filePath = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
-            $file->move(public_path('../videoProd/'), $filePath);
+            $file->storeAs("videoProd/sampul", $filePath);
 
             $video->update([
                 'judul' => $request->judul,

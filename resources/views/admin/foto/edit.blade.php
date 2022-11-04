@@ -3,7 +3,7 @@
 @section('foto', 'active')
 
 @section('title')
-Edit Artikel
+Edit Foto
 @endsection
 
 @section('content')
@@ -13,7 +13,8 @@ Edit Artikel
     @method('put')
     <div class="form-group">
         <label for="judul">Judul</label>
-        <input type="text" class="form-control" name="judul" id="judul" placeholder="judul of foto" value="{{$foto->judul}}">
+        <input type="text" class="form-control" name="judul" id="judul" placeholder="judul of foto"
+            value="{{$foto->judul}}">
         @error('judul')
         <div class="alert alert-danger">
             {{ $message }}

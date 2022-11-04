@@ -11,8 +11,12 @@ class ProdamasController extends Controller
 {
     public function index()
     {
+        if(transform::first()){
+            $transforms = transform::first()->get();
+        }else{
+            $transforms = [];
+        }
         $prodamass = prodamas::orderBy('id')->get();
-        $transforms = transform::first()->get();
         $regulasis = regulasi::orderBy('id')->get();
         return view('prodamas.index', compact('prodamass', 'transforms', 'regulasis'));
     }

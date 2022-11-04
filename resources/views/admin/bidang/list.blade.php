@@ -51,7 +51,8 @@ Bidang Submission
                     <a href="/admin/bidang/{{$bidang->id}}" class="btn btn-info">Edit</a>
                     @csrf
                     @method('DELETE')
-                    <input type="submit" class="btn btn-danger my-1" onclick="return confirm('Yakin Ingin Menghapus Foto?')" value="Delete">
+                    <input type="submit" class="btn btn-danger my-1"
+                        onclick="return confirm('Yakin Ingin Menghapus Foto?')" value="Delete">
                 </form>
             </td>
         </tr>
@@ -66,8 +67,8 @@ Bidang Submission
 
 @section('table')
 <script>
-    $(document).ready(function() {
-        $('#tableFoto').DataTable(); //sesuikan id tabel yg dibat
-    });
+$(document).ready(function() {
+    $('#tableFoto').DataTable(); //sesuikan id tabel yg dibat
+});
 </script>
 @endsection

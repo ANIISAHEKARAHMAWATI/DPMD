@@ -24,18 +24,17 @@ class ArticleController extends Controller
             'judul' => 'required',
             'slug' => 'required',
             'article' => 'required',
-            'picture' => 'mimes:jpeg,jpg,png|max:2200'
         ]);
 
         
         // dd($request->all());
-        $gambar_sampul = $request->gambar_sampul;
+        $gambar_sampul = $request->file('gambar_sampul');
         $new_sampul = time() . ' - ' . $gambar_sampul->getClientOriginalName();
         
         // sampul artikel
-        // $extThumb = $request->gambar_sampul->getClientOriginalName();
-        // $pathThumb = "sampul-".time().".".$extThumb;
-        // $pathStore = $request->gambar_sampul->move(public_path('aticleProd/sampul'), $pathThumb);
+        $extThumb = $gambar_sampul->getClientOriginalName();
+        $pathThumb = "sampul-".time().".".$extThumb;
+        $pathStore = $gambar_sampul->storeAs('articleProd/sampul', $pathThumb);
 
         // // konten artikel
         // $article = $request->file('aticle');
@@ -43,29 +42,16 @@ class ArticleController extends Controller
         // $articlepath = $article->storeAs('article', $articlename);
         // $pathStore = $request->article->move(public_path('articleProd/konten'), $articlepath);
 
-        // ArticleAdmin::create([
-        //     "status" => $request["status"],
-        //     "gambar_sampul" => $pathThumb,
-        //     "text_sampul" => $request["text_sampul"],
-        //     "judul" => $request["judul"],
-        //     "slug" => $request["slug"],
-        //     "article" => $request["article"],
-        //     // "picture" => $articlename
-        // ]);
-
-        $artikel =new ArticleAdmin;
-        $artikel->status = $request->status;
-        $artikel->gambar_sampul =  $new_sampul;
-        $artikel->text_sampul = $request->text_sampul;
-        $artikel->judul = $request->judul;
-        $artikel->slug = $request->slug;
-        $artikel->picture =  $new_sampul;
-        $artikel->article = $request->article;
+        ArticleAdmin::create([
+            "status" => $request["status"],
+            "gambar_sampul" => $pathThumb,
+            "text_sampul" => $request["text_sampul"],
+            "judul" => $request["judul"],
+            "slug" => $request["slug"],
+            "article" => $request["article"],
+        ]);
 
         // dd($artikel);
-
-        $gambar_sampul->move(public_path('../articleProd/sampul/'), $new_sampul);        
-        $artikel->save();
 
         return redirect('/admin/list-article')->with('success', 'Artikel Berhasil Ditambahkan!');
     }
@@ -99,16 +85,15 @@ class ArticleController extends Controller
         $article = ArticleAdmin::findorfail($id);
         $file = $request->file('gambar_sampul');
         if ($file != NULL) {
-            File::delete(public_path("../articleProd/sampul/" . $article->gambar_sampul));
+            File::delete("articleProd/sampul/" . $article->gambar_sampul);
             $filePath = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
-            $file->move(public_path('../articleProd/sampul/'), $filePath);
+            $file->storeAs('articleProd/sampul/', $filePath);
 
             $article->update([
                 'gambar_sampul' => $filePath,
                 'text_sampul' => $request->text_sampul,
                 'judul' => $request->judul,
                 'slug' => $request->slug,
-                'picture' => $filePath,
                 'article' => $request->article
             ]);
         } else {

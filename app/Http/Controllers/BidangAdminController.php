@@ -27,7 +27,7 @@ class BidangAdminController extends Controller
         foreach ($request->file('foto') as $file) {
             if ($file->isValid()) {
                 $foto = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
-                $file->move(public_path('../bidangProd/'), $foto);
+                $file->storeAs('bidangProd/', $foto);
                 $files[] = [
                     'judul' => strtoupper($request->judul),
                     'foto' => $foto,
@@ -43,7 +43,9 @@ class BidangAdminController extends Controller
     public function index()
     {
         $bidangs = Bidang::groupBy('judul')->get();
+        if(DescriptionAdmin::first())
         $descriptions = DescriptionAdmin::first()->get();
+        else $descriptions = [];
         return view('admin.bidang.list', compact('bidangs', 'descriptions'));
     }
 
@@ -57,16 +59,16 @@ class BidangAdminController extends Controller
     {
         $request->validate([
             'judul' => 'required',
-            'foto' => 'mimes:jpeg,jpg,png|max:2200',
+            'foto' => 'image|max:2200',
             'caption' => 'required'
         ]);
 
         $bidangs = Bidang::findorfail($id);
         $file = $request->file('foto');
         if ($file != NULL) {
-            File::delete(public_path("../bidangProd/" . $bidangs->foto));
+            File::delete("bidangProd/" . $bidangs->foto);
             $filePath = round(microtime(true) * 1000) . '-' . str_replace(' ', '-', $file->getClientOriginalName());
-            $file->move(public_path('../bidangProd/'), $filePath);
+            $file->storeAs('bidangProd/', $filePath);
 
             $bidangs->update([
                 'judul' => $request->judul,
