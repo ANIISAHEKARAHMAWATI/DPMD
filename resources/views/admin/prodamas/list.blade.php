@@ -48,7 +48,7 @@ Visi Misi & Dokumen Submission
     </tbody>
 </table>
 
-<label style="display:block; margin-top: 3%">Transformasi</label>
+<label style="display:block; margin-top: 3%">Struktur Organisasi</label>
 <table class="table">
     <thead class="thead-light">
         <tr>

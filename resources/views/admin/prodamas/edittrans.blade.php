@@ -3,7 +3,7 @@
 @section('prodamas', 'active')
 
 @section('title')
-Edit Transformasi Prodamas
+Edit Struktur Organisasi
 @endsection
 
 @section('content')
@@ -32,7 +32,8 @@ Edit Transformasi Prodamas
     </div>
     <div class="form-group">
         <label for="caption">Caption</label>
-        <textarea name="caption" id="description" class="form-control" cols="30" rows="3">{{$transform->caption}}</textarea>
+        <textarea name="caption" id="description" class="form-control" cols="30"
+            rows="3">{{$transform->caption}}</textarea>
         @error('caption')
         <div class="alert alert-danger">
             {{ $message }}
