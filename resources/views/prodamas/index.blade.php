@@ -99,7 +99,7 @@
             <!-- Regulasi Prodamas -->
             <h4 style="font-family: Inter, sans-serif; text-decoration-line: underline; text-decoration-style: double; text-align:center; margin-top: 7%"
                 class="card-title">
-                Regulasi Prodamas
+                Regulasi
             </h4>
             <table class="table mt-4" id="tableRegulasi" style="width:100%;">
                 <thead>
