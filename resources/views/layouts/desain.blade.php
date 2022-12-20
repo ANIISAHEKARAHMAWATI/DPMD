@@ -219,7 +219,7 @@
                                 Kec. Jombang, Kabupaten Jombang, Jawa Timur 61419
                             </p>
                             <p style="font-family: 'Font Awesome 5 Free'; font-weight: 600">&#xf0e0;
-                                dpmdjombang@gmail.com</p>
+                                dpmd@jombangkab.go.id</p>
                             <p style="font-family: 'Font Awesome 5 Free'; font-weight: 600">&#xf095; (0321) 8611775</p>
                         </div>
                         <div class="col-md-6 col-lg-5 footer-links" style="margin-top: 40px; color: white">
