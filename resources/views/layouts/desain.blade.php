@@ -264,7 +264,7 @@
             <div class="footer-bottom">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6 footer-copyright" style="color: white">&copy; 2022 DPMD JOMBANG
+                        <div class="col-md-6 footer-copyright" style="color: white">&copy; 2023 DPMD JOMBANG
                         </div>
                         <div class="col-md-6 footer-social">
                             <!-- <a href=""><i class="fab fa-youtube"></i></a> -->
